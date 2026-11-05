@@ -1,0 +1,3 @@
+'use client';import Guard from '@/components/guard';import {authClient} from '@/lib/auth-client';
+function Profile(){const {data}=authClient.useSession();return <section className="container page-section narrow"><div className="page-heading"><p className="eyebrow">YOUR ACCOUNT</p><h1>My profile<span>.</span></h1></div><div className="panel profile-panel"><img src={data?.user.image||'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=160'} alt="Profile"/><h2>{data?.user.name}</h2><p>{data?.user.email}</p></div></section>}
+export default function ProfilePage(){return <Guard><Profile/></Guard>}

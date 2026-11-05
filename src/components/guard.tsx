@@ -1,0 +1,3 @@
+'use client';
+import { ReactNode,useEffect } from 'react'; import { authClient } from '@/lib/auth-client'; import { usePathname,useRouter } from 'next/navigation';
+export default function Guard({children}:{children:ReactNode}){const {data:session,isPending}=authClient.useSession();const router=useRouter();const path=usePathname();useEffect(()=>{if(!isPending&&!session)router.replace(`/login?callbackUrl=${encodeURIComponent(path)}`)},[isPending,session,path,router]);if(isPending||!session)return <div className="loading"><span className="spinner"/>Checking your library access…</div>;return <>{children}</>}
